@@ -3,6 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import AppRoutes from "./routes";
 import { AuthProvider } from "./contexts/AuthContext";
 import { PrimeReactProvider } from 'primereact/api';
+import SessionTimeoutModal from './components/SessionTimeoutModal';
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <PrimeReactProvider>
         <AuthProvider>
           <AppRoutes />
+          <SessionTimeoutModal />
         </AuthProvider>
       </PrimeReactProvider>
 
