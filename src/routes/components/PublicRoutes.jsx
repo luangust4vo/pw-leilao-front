@@ -2,7 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useContext } from 'react';
 
-const PublicRoute = () => {
+const PublicRoutes = () => {
     const { isAuthenticated } = useContext(AuthContext);
 
     if (isAuthenticated) {
@@ -12,4 +12,4 @@ const PublicRoute = () => {
     return <Outlet />
 }
 
-export default PublicRoute
+export default PublicRoutes

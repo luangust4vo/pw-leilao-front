@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import Navbar from '../../components/Navbar';
 
-const PrivateRoute = () => {
+const PrivateRoutes = () => {
     const { isAuthenticated } = useContext(AuthContext);
 
     if (!isAuthenticated) {
@@ -20,4 +20,4 @@ const PrivateRoute = () => {
     );
 }
 
-export default PrivateRoute
+export default PrivateRoutes
