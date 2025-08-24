@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Login, Register } from '../features/auth';
 import { Dashboard } from '../features/dashboard';
-import PrivateRoute from './PrivateRoute';
-import PublicRoute from './PublicRoute';
+import { PrivateRoute, PublicRoute } from './components';
 
 const AppRoutes = () => {
     return (

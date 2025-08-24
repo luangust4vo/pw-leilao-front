@@ -2,13 +2,16 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AppRoutes from "./routes";
 import { AuthProvider } from "./contexts/AuthContext";
+import { PrimeReactProvider } from 'primereact/api';
 
 const App = () => {
   return (
     <>
-      <AuthProvider>
-        <AppRoutes />
-      </AuthProvider>
+      <PrimeReactProvider>
+        <AuthProvider>
+          <AppRoutes />
+        </AuthProvider>
+      </PrimeReactProvider>
 
       <ToastContainer
         position="top-right"
