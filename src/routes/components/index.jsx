@@ -1,2 +1,3 @@
-export { default as PublicRoute } from './PublicRoute';
-export { default as PrivateRoute } from './PrivateRoute';
+export { default as PublicRoutes } from './PublicRoutes';
+export { default as PrivateRoutes } from './PrivateRoutes';
+export { default as AdminRoutes } from './AdminRoutes';
