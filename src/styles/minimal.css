@@ -1,0 +1,86 @@
+.auth-layout {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8fafc;
+    padding: 2rem 1rem;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 28rem;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-title {
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+}
+
+.auth-subtitle {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.auth-link {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-link:hover {
+    color: #2563eb;
+}
+
+.form-field {
+    margin-bottom: 1.5rem;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+.form-field .p-inputtext,
+.form-field .p-password,
+.form-field .p-password .p-inputtext {
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+.form-field .p-password {
+    width: 100% !important;
+    display: block !important;
+}
+
+.form-field .p-password>.p-inputtext {
+    width: 100% !important;
+}
+
+/* Força a largura total para todos os componentes de senha */
+.p-password,
+.p-password .p-inputtext,
+.p-password-input {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+}
+
+@media (max-width: 640px) {
+    .auth-layout {
+        padding: 1rem 0.5rem;
+    }
+
+    .auth-card {
+        max-width: 100%;
+    }
+}
