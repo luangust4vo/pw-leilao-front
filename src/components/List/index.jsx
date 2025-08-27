@@ -4,7 +4,7 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 
-const List = ({ profiles, loading, onNew, onEdit, onDelete }) => {
+const List = ({ data, loading, onNew, onEdit, onDelete, children }) => {
     const [globalFilter, setGlobalFilter] = useState(null);
 
     const header = () => {
@@ -38,7 +38,7 @@ const List = ({ profiles, loading, onNew, onEdit, onDelete }) => {
 
     return (
         <DataTable
-            value={profiles}
+            value={data}
             loading={loading}
             dataKey="id"
             rowHover={true}
@@ -47,12 +47,11 @@ const List = ({ profiles, loading, onNew, onEdit, onDelete }) => {
             header={header}
             globalFilter={globalFilter}
             globalFilterFields={['id', 'type']}
-            emptyMessage="Nenhum perfil encontrado."
+            emptyMessage="Não tem nada aqui ;-;"
             paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
             currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} perfis"
         >
-            <Column field="id" header="ID" sortable />
-            <Column field="type" header="Tipo" sortable />
+            {children}
             <Column body={body} exportable={false} style={{ minWidth: '12rem' }} />
         </DataTable>
     );

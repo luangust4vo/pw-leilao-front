@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Login, Register } from '../features/auth';
 import { Dashboard } from '../features/dashboard';
-import { Profile } from '../features/profile';
+import Profile from '../features/profile';
 import { PrivateRoutes, PublicRoutes, AdminRoutes } from './components';
 
 const AppRoutes = () => {
