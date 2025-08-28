@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import AppRoutes from "./routes";
 import { AuthProvider } from "./contexts/AuthContext";
 import { PrimeReactProvider } from 'primereact/api';
-import SessionTimeoutModal from './components/SessionTimeoutModal';
+import { SessionTimeoutModal } from './features/auth/components';
 
 const App = () => {
   return (
