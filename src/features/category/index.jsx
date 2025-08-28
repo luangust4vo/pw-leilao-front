@@ -3,7 +3,7 @@ import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { toast } from 'react-toastify';
-import { List, Modal } from '../../components';
+import { List, EntityModal } from '../../components';
 import api from '../../services/api';
 
 const Category = () => {
@@ -113,7 +113,7 @@ const Category = () => {
                 <Column field="id" header="ID" sortable />
                 <Column field="name" header="Nome" sortable />
             </List>
-            <Modal
+            <EntityModal
                 name="Categoria"
                 visible={isDialogVisible}
                 onHide={handleCloseModal}
@@ -146,7 +146,7 @@ const Category = () => {
                         />
                     </div>
                 </div>
-            </Modal>
+            </EntityModal>
         </div>
     );
 };
