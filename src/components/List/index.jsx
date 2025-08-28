@@ -4,7 +4,7 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 
-const List = ({ data, loading, onNew, onEdit, onDelete, filterFields, children }) => {
+const List = ({ data, loading, onNew, onEdit, onDelete, onRowClick, filterFields, children }) => {
     const [globalFilter, setGlobalFilter] = useState(null);
 
     const header = () => {
@@ -36,6 +36,12 @@ const List = ({ data, loading, onNew, onEdit, onDelete, filterFields, children }
         </div>
     );
 
+    const handleRowClick = (e) => {
+        if (onRowClick) {
+            onRowClick(e.data);
+        }
+    };
+
     return (
         <DataTable
             value={data}
@@ -50,6 +56,8 @@ const List = ({ data, loading, onNew, onEdit, onDelete, filterFields, children }
             emptyMessage="Não tem nada aqui ;-;"
             paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
             currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}"
+            selectionMode={onRowClick ? "single" : null}
+            onRowSelect={handleRowClick}
         >
             {children}
             <Column body={body} exportable={false} style={{ minWidth: '12rem' }} />

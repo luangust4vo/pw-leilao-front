@@ -3,12 +3,14 @@ import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { toast } from 'react-toastify';
-import { List, EntityModal } from '../../components';
+import { List, EntityModal, Modal } from '../../components';
 import api from '../../services/api';
 
 const Category = () => {
     const [categories, setCategories] = useState([]);
     const [newCategory, setNewCategory] = useState({ name: '', observation: '' });
+    const [isViewModalVisible, setIsViewModalVisible] = useState(false);
+    const [selectedCategoryForView, setSelectedCategoryForView] = useState(null);
     const [isDialogVisible, setIsDialogVisible] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [isNew, setIsNew] = useState(false);
@@ -41,8 +43,13 @@ const Category = () => {
         setIsDialogVisible(false);
     };
 
+    const handleViewDetails = (category) => {
+        setSelectedCategoryForView(category);
+        setIsViewModalVisible(true);
+    };
+
     const handleSave = (categoryData) => {
-        if (!categoryData.name && categoryData.name.trim()) {
+        if (!categoryData.name && categoryData.name.trim() == '') {
             toast.error('O nome da categoria é obrigatório.');
             return;
         }
@@ -109,6 +116,7 @@ const Category = () => {
                 onEdit={handleEdit}
                 onDelete={handleDelete}
                 filterFields={['id', 'name']}
+                onRowClick={handleViewDetails}
             >
                 <Column field="id" header="ID" sortable />
                 <Column field="name" header="Nome" sortable />
@@ -147,6 +155,25 @@ const Category = () => {
                     </div>
                 </div>
             </EntityModal>
+
+            <Modal
+                header="Detalhes da Categoria"
+                visible={isViewModalVisible}
+                onHide={() => setIsViewModalVisible(false)}
+            >
+                {selectedCategoryForView && (
+                    <div className="flex flex-column gap-3">
+                        <div>
+                            <span className="font-bold">Nome: </span>
+                            <span>{selectedCategoryForView.name}</span>
+                        </div>
+                        <div>
+                            <span className="font-bold">Observação: </span>
+                            <span>{selectedCategoryForView.observation || 'Nenhuma observação.'}</span>
+                        </div>
+                    </div>
+                )}
+            </Modal>
         </div>
     );
 };

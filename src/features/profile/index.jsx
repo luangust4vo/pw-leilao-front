@@ -42,7 +42,7 @@ const Profile = () => {
     };
 
     const handleSave = (profileData) => {
-        if (!profileData.type && profileData.type.trim()) {
+        if (!profileData.type && profileData.type.trim() == '') {
             toast.error('O campo Tipo do Perfil é obrigatório.');
             return;
         }
