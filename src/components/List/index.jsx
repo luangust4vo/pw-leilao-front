@@ -4,7 +4,7 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 
-const List = ({ data, loading, onNew, onEdit, onDelete, children }) => {
+const List = ({ data, loading, onNew, onEdit, onDelete, filterFields, children }) => {
     const [globalFilter, setGlobalFilter] = useState(null);
 
     const header = () => {
@@ -46,10 +46,10 @@ const List = ({ data, loading, onNew, onEdit, onDelete, children }) => {
             paginator rows={10}
             header={header}
             globalFilter={globalFilter}
-            globalFilterFields={['id', 'type']}
+            globalFilterFields={filterFields}
             emptyMessage="Não tem nada aqui ;-;"
             paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} perfis"
+            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}"
         >
             {children}
             <Column body={body} exportable={false} style={{ minWidth: '12rem' }} />

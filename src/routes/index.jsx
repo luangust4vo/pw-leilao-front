@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Login, Register } from '../features/auth';
 import { Dashboard } from '../features/dashboard';
 import Profile from '../features/profile';
+import Category from '../features/category';
 import { PrivateRoutes, PublicRoutes, AdminRoutes } from './components';
 
 const AppRoutes = () => {
@@ -18,6 +19,7 @@ const AppRoutes = () => {
 
                     <Route element={<AdminRoutes />}>
                         <Route path="/profiles" element={<Profile />} />
+                        <Route path="/categories" element={<Category />} />
                     </Route>
                 </Route>
 
