@@ -23,7 +23,7 @@ const Category = () => {
     const fetchCategories = () => {
         setLoading(true);
         api.get('/categories').then(response => {
-            setCategories(response.data.content);
+            setCategories(response.data.dados.content);
         }).catch(error => {
             toast.error('Erro ao buscar perfis');
             setCategories([]);

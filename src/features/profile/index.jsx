@@ -21,7 +21,7 @@ const Profile = () => {
     const fetchProfiles = () => {
         setLoading(true);
         api.get('/profiles').then(response => {
-            setProfiles(response.data.content);
+            setProfiles(response.data.dados.content);
         }).catch(error => {
             toast.error('Erro ao buscar perfis');
             setProfiles([]);
