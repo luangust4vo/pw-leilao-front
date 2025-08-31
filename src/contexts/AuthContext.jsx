@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, useCallback } from 'react';
-import api from '../services/api';
+import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import api from '../services/api';
 
 const AuthContext = createContext(null);
 
@@ -13,6 +14,8 @@ const AuthProvider = ({ children }) => {
     const [tokenExpirationDate, setTokenExpirationDate] = useState(null);
     const [isSessionModalVisible, setIsSessionModalVisible] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [status, setStatus] = useState('verifying');
+    const [searchParams] = useSearchParams();
     const isAuthenticated = !!token;
 
     const handleAuthentication = useCallback((data) => {
@@ -35,8 +38,7 @@ const AuthProvider = ({ children }) => {
     };
 
     const register = async (credentials) => {
-        const response = await api.post('/auth/register', credentials);
-        handleAuthentication(response.data);
+        await api.post('/auth/register', credentials);
     };
 
     const refreshToken = async () => {
@@ -49,6 +51,28 @@ const AuthProvider = ({ children }) => {
             toast.error('Sessão expirada. Faça login novamente.');
             console.error('Token refresh failed:', error);
             logout();
+        }
+    };
+
+    const verify = async () => {
+        const code = searchParams.get('code');
+
+        if (!code) {
+            setStatus('error');
+            return 'Código de verificação não encontrado.';
+        }
+
+        try {
+            const response = await api.get(`/auth/verify-account?code=${code}`);
+
+            handleAuthentication(response.data);
+
+            setStatus('success');
+            return 'Conta verificada com sucesso! Bem-vindo(a)!';
+        } catch (error) {
+            console.error(error);
+            setStatus('error');
+            return 'Houve um erro ao verificar sua conta. Tente novamente.';
         }
     };
 
@@ -113,10 +137,12 @@ const AuthProvider = ({ children }) => {
         loading,
         login,
         register,
+        verify,
         logout,
         refreshToken,
         isSessionModalVisible,
-        tokenExpirationDate
+        tokenExpirationDate,
+        status
     };
 
     return (

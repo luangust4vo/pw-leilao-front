@@ -11,7 +11,7 @@ import { registerSchema } from '../../schemas/authSchemas';
 import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Register() {
-    const { register, token } = useContext(AuthContext);
+    const { register } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -34,11 +34,9 @@ export default function Register() {
         try {
             await register(data);
 
-            if (token) {
-                toast.success('Conta criada com sucesso!');
-                navigate('/dashboard');
-                return;
-            }
+            toast.success('Conta criada com sucesso! Verifique seu e-mail para ativar a conta.');
+
+            navigate('/login');
         } catch (error) {
             toast.error(error.message || 'Erro ao criar conta');
         } finally {

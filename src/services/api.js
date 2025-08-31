@@ -39,10 +39,11 @@ api.interceptors.response.use(
 
     if (response) {
       const { status, data } = response;
+      const mensagem = data?.mensagem || 'Ocorreu um erro!';
 
       switch (status) {
         case 400:
-          toast.error(data?.message || 'Dados inválidos');
+          toast.error(mensagem);
           break;
         case 401:
           toast.error('Sessão expirada. Faça login novamente');
@@ -52,23 +53,13 @@ api.interceptors.response.use(
           window.location.href = '/login';
           break;
         case 403:
-          toast.error('Acesso negado');
-          break;
         case 404:
-          toast.error('Recurso não encontrado');
-          break;
         case 422:
-          if (data?.errors && Array.isArray(data.errors)) {
-            data.errors.forEach(err => toast.error(err.message || err));
-          } else {
-            toast.error(data?.message || 'Erro de validação');
-          }
-          break;
         case 500:
-          toast.error('Erro interno do servidor');
+          toast.error(mensagem);
           break;
         default:
-          toast.error(data?.message || 'Erro inesperado');
+          toast.error(mensagem);
       }
     } else if (message === 'Network Error') {
       toast.error('Erro de conexão. Verifique sua internet');
