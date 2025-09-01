@@ -76,6 +76,18 @@ const AuthProvider = ({ children }) => {
         }
     };
 
+    const requestPasswordReset = async (email) => {
+        await api.post('/auth/forgot-password', { email });
+    };
+
+    const verifyResetCode = async (code) => {
+        await api.post(`/auth/verify-reset-code?code=${code}`);
+    };
+
+    const resetPassword = async (data) => {
+        await api.post('/auth/reset-password', data);
+    };
+
     const logout = useCallback(() => {
         setToken(null);
         setUser(null);
@@ -142,7 +154,10 @@ const AuthProvider = ({ children }) => {
         refreshToken,
         isSessionModalVisible,
         tokenExpirationDate,
-        status
+        status,
+        resetPassword,
+        requestPasswordReset,
+        verifyResetCode,
     };
 
     return (

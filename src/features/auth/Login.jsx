@@ -80,20 +80,27 @@ export default function Login() {
                             name="password"
                             control={control}
                             render={({ field }) => (
-                                <Password
-                                    {...field}
-                                    id="password"
-                                    placeholder="Sua senha"
-                                    toggleMask
-                                    feedback={false}
-                                    className={errors.password ? 'p-invalid' : ''}
-                                    style={{ width: '100%' }}
-                                    inputStyle={{ width: '100%' }}
-                                    pt={{
-                                        root: { style: { width: '100%' } },
-                                        input: { style: { width: '100%' } }
-                                    }}
-                                />
+                                <>
+                                    <Password
+                                        {...field}
+                                        id="password"
+                                        placeholder="Sua senha"
+                                        toggleMask
+                                        feedback={false}
+                                        className={errors.password ? 'p-invalid' : ''}
+                                        style={{ width: '100%' }}
+                                        inputStyle={{ width: '100%' }}
+                                        pt={{
+                                            root: { style: { width: '100%' } },
+                                            input: { style: { width: '100%' } }
+                                        }}
+                                    />
+                                    <div style={{ textAlign: 'right', marginBottom: '1.5rem' }}>
+                                        <Link to="/forgot-password" className="auth-link">
+                                            Esqueceu sua senha?
+                                        </Link>
+                                    </div>
+                                </>
                             )}
                         />
                         {errors.password && (
