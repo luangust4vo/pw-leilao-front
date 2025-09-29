@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ForgotPassword, Login, Register, ResetPassword, VerifyAccount, VerifyResetCode } from '../features/auth';
-import { Dashboard } from '../features/dashboard';
+import Dashboard from '../features/dashboard';
 import Profile from '../features/profile';
 import Category from '../features/category';
 import { PrivateRoutes, PublicRoutes, AdminRoutes } from './components';

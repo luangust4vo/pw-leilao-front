@@ -1,12 +1,4 @@
-.p-menuitem.logout-item .p-menuitem-link {
-    color: rgba(255, 0, 0, 0.7) !important;
-}
-
-.p-menuitem.logout-item .p-menuitem-icon {
-    color: rgba(255, 0, 0, 0.7) !important;
-}
-
-.p-menuitem.logout-item .p-menuitem-text {
+.p-menuitem.logout-item :is(.p-menuitem-link, .p-menuitem-icon, .p-menuitem-text) {
     color: rgba(255, 0, 0, 0.7) !important;
 }
 
@@ -15,10 +7,6 @@
     color: white !important;
 }
 
-.p-menuitem.logout-item .p-menuitem-link:hover .p-menuitem-icon {
-    color: white !important;
-}
-
-.p-menuitem.logout-item .p-menuitem-link:hover .p-menuitem-text {
+.p-menuitem.logout-item .p-menuitem-link:hover :is(.p-menuitem-icon, .p-menuitem-text) {
     color: white !important;
 }
