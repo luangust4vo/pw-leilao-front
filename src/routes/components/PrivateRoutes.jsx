@@ -11,12 +11,12 @@ const PrivateRoutes = () => {
     }
 
     return (
-        <div>
+        <main>
             <Navbar />
-            <main>
+            <div className="container">
                 <Outlet />
-            </main>
-        </div>
+            </div>
+        </main>
     );
 }
 
