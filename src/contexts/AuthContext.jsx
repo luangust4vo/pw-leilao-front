@@ -32,6 +32,14 @@ const AuthProvider = ({ children }) => {
         localStorage.setItem('tokenExpiration', expirationDate.toISOString());
     }, []);
 
+    const updateUser = useCallback((newData) => {
+        setUser((prev) => {
+            const updated = { ...prev, ...newData };
+            localStorage.setItem('user', JSON.stringify(updated));
+            return updated;
+        });
+    }, []);
+
     const login = async (credentials) => {
         const response = await api.post('/auth/login', credentials);
         handleAuthentication(response.data);
@@ -158,6 +166,7 @@ const AuthProvider = ({ children }) => {
         resetPassword,
         requestPasswordReset,
         verifyResetCode,
+        updateUser
     };
 
     return (
