@@ -3,6 +3,7 @@ import { ForgotPassword, Login, Register, ResetPassword, VerifyAccount, VerifyRe
 import Dashboard from '../features/dashboard';
 import Profile from '../features/profile';
 import Category from '../features/category';
+import { UserProfile } from '../features/person';
 import { PrivateRoutes, PublicRoutes, AdminRoutes } from './components';
 
 const AppRoutes = () => {
@@ -19,6 +20,7 @@ const AppRoutes = () => {
 
             <Route element={<PrivateRoutes />}>
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/user" element={<UserProfile />} />
 
                 <Route element={<AdminRoutes />}>
                     <Route path="/profiles" element={<Profile />} />
