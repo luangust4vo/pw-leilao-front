@@ -24,7 +24,7 @@ const Navbar = () => {
         {
             label: 'Perfil',
             icon: 'pi pi-user',
-            url: '/profile',
+            url: '/user/',
         },
         {
             label: 'Sair',
@@ -39,8 +39,8 @@ const Navbar = () => {
     const endContent = (
         <div className="flex align-items-center gap-3">
             <Avatar
-                image={user?.avatarUrl || null}
-                label={!user?.avatarUrl ? (user?.name?.[0] || user?.email?.[0])?.toUpperCase() : null}
+                image={user?.profileImage || null}
+                label={!user?.profileImage ? (user?.name?.[0] || user?.email?.[0])?.toUpperCase() : null}
                 shape="circle"
                 size="large"
                 onClick={(event) => profileMenu.current.toggle(event)}
