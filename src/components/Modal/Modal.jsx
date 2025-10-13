@@ -1,6 +1,6 @@
 import { Dialog } from "primereact/dialog"
 
-const Modal = ({ header, visible, onHide, footer, children }) => {
+const Modal = ({ header, visible, onHide, footer, children, style }) => {
     return (
         <Dialog
             visible={visible}
@@ -9,7 +9,7 @@ const Modal = ({ header, visible, onHide, footer, children }) => {
             onHide={onHide}
             footer={footer}
             className="p-fluid"
-            style={{ width: '32rem' }}
+            style={{ width: '32rem', ...style }}
         >
             {children}
         </Dialog>
