@@ -11,6 +11,10 @@ const PersonalInfo = ({ user }) => {
     const avatarInputRef = useRef(null);
     const [avatar, setAvatar] = useState(user?.profileImage || null);
     const [loading, setLoading] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [formData, setFormData] = useState({
+        name: user?.name || "",
+    });
     const { updateUser } = useAuth();
 
     const handleFileSelect = async (e) => {
@@ -49,6 +53,35 @@ const PersonalInfo = ({ user }) => {
         }
     };
 
+    const handleChange = (e) => {
+        const { id, value } = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [id]: value
+        }));
+    };
+
+    const handleSave = async () => {
+        try {
+            const res = await api.put(`/people/${user.id}`, formData);
+
+            if (res.data.erro) throw new Error("Erro ao atualizar informações.");
+
+            updateUser(res.data.dados);
+            toast.success("Informações atualizadas com sucesso!");
+            setIsEditing(false);
+        } catch (err) {
+            toast.error("Erro ao salvar alterações: ", err);
+        }
+    };
+
+    const handleCancel = () => {
+        setIsEditing(false);
+        setFormData({
+            name: user?.name || "",
+        });
+    };
+
     return (
         <div className="flex flex-column gap-4">
             <div className="flex align-items-center gap-2">
@@ -77,52 +110,49 @@ const PersonalInfo = ({ user }) => {
                 <Divider layout="vertical" />
 
                 <div className="grid flex-1">
-                    <div className="col-12 md:col-6">
-                        <div className="flex flex-column gap-2">
-                            <label htmlFor="name" className="font-semibold">Nome Completo</label>
-                            <InputText
-                                id="name"
-                                defaultValue={user?.name}
-                            />
+                    {!isEditing && (
+                        <div className="col-12">
+                            <p><strong>Nome:</strong> {formData.name || "—"}</p>
                         </div>
-                    </div>
+                    )}
 
-                    <div className="col-12 md:col-6">
-                        <div className="flex flex-column gap-2">
-                            <label htmlFor="email" className="font-semibold">E-mail</label>
-                            <InputText
-                                id="email"
-                                defaultValue={user?.email}
-                                disabled
-                            />
-                        </div>
-                    </div>
-
-                    <div className="col-12 md:col-6">
-                        <div className="flex flex-column gap-2">
-                            <label htmlFor="phone" className="font-semibold">Telefone</label>
-                            <InputText
-                                id="phone"
-                                placeholder="(00) 00000-0000"
-                            />
-                        </div>
-                    </div>
-
-                    <div className="col-12 md:col-6">
-                        <div className="flex flex-column gap-2">
-                            <label htmlFor="cpf" className="font-semibold">CPF</label>
-                            <InputText
-                                id="cpf"
-                                placeholder="000.000.000-00"
-                            />
-                        </div>
-                    </div>
+                    {isEditing && (
+                        <>
+                            <div className="col-12 md:col-6">
+                                <div className="flex flex-column gap-2">
+                                    <label htmlFor="name" className="font-semibold">Nome Completo</label>
+                                    <InputText
+                                        id="name"
+                                        defaultValue={formData.name}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
 
             <div className="flex justify-content-end gap-2">
-                <Button label="Cancelar" severity="secondary" outlined />
-                <Button label="Salvar Alterações" icon="pi pi-check" />
+                {!isEditing ? (
+                    <Button label="Editar" icon="pi pi-pencil" onClick={() => setIsEditing(true)} />
+                ) : (
+                    <>
+                        <Button
+                            label="Cancelar"
+                            severity="secondary"
+                            outlined
+                            onClick={handleCancel}
+                            disabled={loading}
+                        />
+                        <Button
+                            label="Salvar Alterações"
+                            icon="pi pi-check"
+                            onClick={handleSave}
+                            loading={loading}
+                        />
+                    </>
+                )}
             </div>
         </div>);
 };
