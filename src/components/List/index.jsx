@@ -4,7 +4,7 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 
-const List = ({ data, loading, onNew, onEdit, onDelete, onRowClick, filterFields, children }) => {
+const List = ({ data, loading, onNew, onEdit, onDelete, onRowClick, filterFields, rows, children }) => {
     const [globalFilter, setGlobalFilter] = useState(null);
 
     const header = () => {
@@ -49,7 +49,7 @@ const List = ({ data, loading, onNew, onEdit, onDelete, onRowClick, filterFields
             dataKey="id"
             rowHover={true}
             size='small'
-            paginator rows={10}
+            paginator rows={rows ?? 10}
             header={header}
             globalFilter={globalFilter}
             globalFilterFields={filterFields}

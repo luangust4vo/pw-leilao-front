@@ -51,6 +51,18 @@ const UserProfile = () => {
                         <TabPanel header="Informações Pessoais" leftIcon="pi pi-user mr-2">
                             <PersonalInfo user={user} />
                         </TabPanel>
+
+                        {/* <TabPanel header="Meus Leilões" leftIcon="pi pi-tag mr-2">
+                            <UserAuctions />
+                        </TabPanel>
+
+                        <TabPanel header="Meus Lances" leftIcon="pi pi-bolt mr-2">
+                            <UserBids />
+                        </TabPanel> */}
+
+                        <TabPanel header="Configurações" leftIcon="pi pi-cog mr-2">
+                            <AccountSettings />
+                        </TabPanel>
                     </TabView>
                 </div>
             </div>

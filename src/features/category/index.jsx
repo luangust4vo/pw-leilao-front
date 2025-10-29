@@ -112,6 +112,7 @@ const Category = () => {
             <List
                 data={categories}
                 loading={loading}
+                rows={5}
                 onNew={handleOpenModal}
                 onEdit={handleEdit}
                 onDelete={handleDelete}
