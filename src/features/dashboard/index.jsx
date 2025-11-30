@@ -7,6 +7,10 @@ const Dashboard = () => {
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
+        if (!user) {
+            return;
+        }
+
         const hasLoggedIn = localStorage.getItem("hasLoggedIn");
         if (hasLoggedIn) return;
 

@@ -12,6 +12,8 @@ const Navbar = () => {
     const navigate = useNavigate();
     const profileMenu = useRef(null);
 
+    const isAdmin = user?.profiles?.some(profile => profile.type === 'ROLE_ADMIN');
+
     const handleLogout = () => {
         logout();
 
@@ -24,15 +26,27 @@ const Navbar = () => {
         {
             label: 'Perfil',
             icon: 'pi pi-user',
-            url: '/user/',
-        },
+            command: () => navigate('/user'),
+        }
+    ];
+
+    if (isAdmin) {
+        profileMenuItems.push({
+            label: 'Painel',
+            icon: 'pi pi-cog',
+            command: () => navigate('/admin'),
+        });
+    }
+
+    profileMenuItems.push(
+        { separator: true },
         {
             label: 'Sair',
             icon: 'pi pi-sign-out',
             command: handleLogout,
             className: "logout-item",
         }
-    ];
+    );
 
     const startContent = <h2 className="m-0">Leilão</h2>;
 
