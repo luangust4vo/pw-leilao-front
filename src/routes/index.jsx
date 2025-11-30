@@ -1,11 +1,19 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { ForgotPassword, Login, Register, ResetPassword, VerifyAccount, VerifyResetCode } from '../features/auth';
-import Dashboard from '../features/dashboard';
-import Profile from '../features/profile';
-import Category from '../features/category';
-import Panel from '../features/panel';
-import { UserProfile } from '../features/person';
 import { PrivateRoutes, PublicRoutes, AdminRoutes } from './components';
+import {
+    ForgotPassword,
+    Login,
+    Register,
+    ResetPassword,
+    VerifyAccount,
+    VerifyResetCode,
+    Dashboard,
+    Profile,
+    Category,
+    Panel,
+    UserProfile,
+    Auction
+} from '../features'
 
 const AppRoutes = () => {
     return (
@@ -22,6 +30,7 @@ const AppRoutes = () => {
             <Route element={<PrivateRoutes />}>
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/user" element={<UserProfile />} />
+                <Route path="/auction" element={<Auction />} />
 
                 <Route element={<AdminRoutes />}>
                     <Route path="/admin" element={<Panel />} />
