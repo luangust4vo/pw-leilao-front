@@ -13,8 +13,14 @@ const UserProfile = () => {
     const { user } = useAuth();
     const [activeIndex, setActiveIndex] = useState(0);
 
+    const roles = {
+        ROLE_ADMIN: 'Administrador',
+        ROLE_BUYER: 'Comprador',
+        ROLE_SELLER: 'Vendedor',
+    };
+
     return (
-        <div className="profile-container p-4">
+        <div className="profile-container p-4 pb-0">
             <div className="grid">
                 <div className="col-12">
                     <Card className="m-0">
@@ -34,7 +40,7 @@ const UserProfile = () => {
                                         {user?.profiles?.map((profile, index) => (
                                             <Badge
                                                 key={index}
-                                                value={profile.type.replace('ROLE_', '')}
+                                                value={roles[profile.type] || profile.type}
                                                 severity="info"
                                             />
                                         ))}
@@ -52,11 +58,11 @@ const UserProfile = () => {
                             <PersonalInfo user={user} />
                         </TabPanel>
 
-                        {/* <TabPanel header="Meus Leilões" leftIcon="pi pi-tag mr-2">
+                        <TabPanel header="Meus Leilões" leftIcon="pi pi-tag mr-2">
                             <UserAuctions />
                         </TabPanel>
 
-                        <TabPanel header="Meus Lances" leftIcon="pi pi-bolt mr-2">
+                        {/* <TabPanel header="Meus Lances" leftIcon="pi pi-bolt mr-2">
                             <UserBids />
                         </TabPanel> */}
 

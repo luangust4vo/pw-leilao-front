@@ -14,9 +14,19 @@ main {
     height: 100%;
 }
 
+textarea {
+    resize: vertical;
+}
+
 /* Ajuste conforme a altura do navbar */
 .container {
     height: calc(100% - 82px);
+}
+
+.p-dialog-footer {
+    padding: 1rem .5rem;
+    border-top: 1px solid #e5e7eb;
+    background-color: #f9fafb;
 }
 
 .auth-layout {

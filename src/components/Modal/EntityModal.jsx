@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Button } from 'primereact/button';
 import Modal from './Modal';
 
-const EntityModal = ({ name, visible, onHide, onSave, data, newData, setNewData, isNew, children }) => {
+const EntityModal = ({ name, visible, onHide, onSave, data, newData, setNewData, isNew, style, children }) => {
     useEffect(() => {
         if (data) {
             setNewData({ ...data });
@@ -26,6 +26,7 @@ const EntityModal = ({ name, visible, onHide, onSave, data, newData, setNewData,
             visible={visible}
             onHide={onHide}
             footer={dialogFooter}
+            style={style}
         >
             {children}
         </Modal>
