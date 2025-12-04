@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { PrivateRoutes, PublicRoutes, AdminRoutes } from './components';
+import { PrivateRoutes, PublicRoutes, AdminRoutes, StandardRoutes } from './components';
 import {
     ForgotPassword,
     Login,
@@ -12,7 +12,8 @@ import {
     Category,
     Panel,
     UserProfile,
-    Auction
+    AuctionList,
+    Details
 } from '../features'
 
 const AppRoutes = () => {
@@ -27,10 +28,14 @@ const AppRoutes = () => {
                 <Route path="/reset-password" element={<ResetPassword />} />
             </Route>
 
+            <Route element={<StandardRoutes />}>
+                <Route path="/" element={<AuctionList />} />
+                <Route path="/auctions/:id" element={<Details />} />
+            </Route>
+
             <Route element={<PrivateRoutes />}>
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/user" element={<UserProfile />} />
-                <Route path="/auction" element={<Auction />} />
 
                 <Route element={<AdminRoutes />}>
                     <Route path="/admin" element={<Panel />} />
@@ -39,7 +44,7 @@ const AppRoutes = () => {
                 </Route>
             </Route>
 
-            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
     );
 };

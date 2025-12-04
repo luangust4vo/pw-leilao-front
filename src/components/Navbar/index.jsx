@@ -2,13 +2,14 @@ import { useRef } from 'react';
 import { Toolbar } from 'primereact/toolbar';
 import { Avatar } from 'primereact/avatar';
 import { Menu } from 'primereact/menu';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
 import './navbar.css';
+import { Button } from 'primereact/button';
 
 const Navbar = () => {
-    const { user, logout } = useAuth();
+    const { user, logout, isAuthenticated } = useAuth();
     const navigate = useNavigate();
     const profileMenu = useRef(null);
 
@@ -48,9 +49,13 @@ const Navbar = () => {
         }
     );
 
-    const startContent = <h2 className="m-0">Leilão</h2>;
+    const startContent = (
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <h2 className="m-0 cursor-pointer">Leilão Online</h2>
+        </Link>
+    );
 
-    const endContent = (
+    const endContent = isAuthenticated ? (
         <div className="flex align-items-center gap-3">
             <Avatar
                 image={user?.profileImage || null}
@@ -62,21 +67,20 @@ const Navbar = () => {
                 aria-haspopup
                 className="cursor-pointer"
             />
+            <Menu model={profileMenuItems} popup ref={profileMenu} id="profile_menu" popupAlignment="right" />
+        </div>
+    ) : (
+        <div className="flex align-items-center gap-2">
+            <Link to="/login">
+                <Button label="Entrar" text />
+            </Link>
+            <Link to="/register">
+                <Button label="Criar Conta" severity="primary" />
+            </Link>
         </div>
     );
 
-    return (
-        <>
-            <Menu
-                model={profileMenuItems}
-                popup
-                ref={profileMenu}
-                id="profile_menu"
-                popupAlignment="right"
-            />
-            <Toolbar start={startContent} end={endContent} className="border-noround p-3" />
-        </>
-    );
+    return <Toolbar start={startContent} end={endContent} className="border-noround p-3" />;
 };
 
 export default Navbar;

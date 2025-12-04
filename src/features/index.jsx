@@ -8,5 +8,6 @@ export { default as Dashboard } from './dashboard';
 export { default as Profile } from './profile';
 export { default as Category } from './category';
 export { default as Panel } from './panel';
-export { default as Auction } from './auction';
+export { default as AuctionList } from './auction/AuctionList';
+export { default as Details } from './auction/Details';
 export { default as UserProfile } from './person/user_profile';
