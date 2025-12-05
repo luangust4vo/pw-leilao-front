@@ -80,7 +80,14 @@ const Navbar = () => {
         </div>
     );
 
-    return <Toolbar start={startContent} end={endContent} className="border-noround p-3" />;
+    return (
+        <Toolbar
+            start={startContent}
+            end={endContent}
+            className="border-noround p-3 sticky top-0 z-5 shadow-2"
+            style={{ width: '100%' }}
+        />
+    );
 };
 
 export default Navbar;
